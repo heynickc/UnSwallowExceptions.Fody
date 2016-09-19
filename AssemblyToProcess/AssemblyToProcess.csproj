@@ -41,5 +41,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UnSwallowExceptionsReferenceAssembly\UnSwallowExceptionsReferenceAssembly.csproj">
+      <Project>{45930042-38c6-470e-96eb-6bedab5410d3}</Project>
+      <Name>UnSwallowExceptionsReferenceAssembly</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
