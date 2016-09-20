@@ -58,7 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="CecilExtensions.cs" />
     <Compile Include="ModuleWeaver.cs" />
+    <Compile Include="SystemTypesResover.cs" />
+    <Compile Include="WeavingException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

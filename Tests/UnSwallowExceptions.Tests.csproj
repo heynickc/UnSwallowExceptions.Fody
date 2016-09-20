@@ -56,7 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppDomainAssemblyFinder.cs" />
+    <Compile Include="AssemblyExtensions.cs" />
+    <Compile Include="MockAssemblyResolver.cs" />
     <Compile Include="Verifier.cs" />
+    <Compile Include="WeaverHelper.cs" />
     <Compile Include="WeaverTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,32 +7,22 @@ using NUnit.Framework;
 [TestFixture]
 public class WeaverTests
 {
+    string beforeAssemblyPath;
     Assembly assembly;
-    string newAssemblyPath;
-    string assemblyPath;
+    string afterAssemblyPath;
 
     [TestFixtureSetUp]
     public void Setup()
     {
-        var projectPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\AssemblyToProcess\AssemblyToProcess.csproj"));
-        assemblyPath = Path.Combine(Path.GetDirectoryName(projectPath), @"bin\Debug\AssemblyToProcess.dll");
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\AssemblyToProcess\bin\Debug\AssemblyToProcess.dll");
+
+        AppDomainAssemblyFinder.Attach();
+        beforeAssemblyPath = Path.GetFullPath(path);
 #if (!DEBUG)
-        assemblyPath = assemblyPath.Replace("Debug", "Release");
+        beforeAssemblyPath = beforeAssemblyPath.Replace("Debug", "Release");
 #endif
-
-        newAssemblyPath = assemblyPath.Replace(".dll", "2.dll");
-        File.Copy(assemblyPath, newAssemblyPath, true);
-
-        var moduleDefinition = ModuleDefinition.ReadModule(newAssemblyPath);
-        var weavingTask = new ModuleWeaver
-        {
-            ModuleDefinition = moduleDefinition
-        };
-
-        weavingTask.Execute();
-        moduleDefinition.Write(newAssemblyPath);
-
-        assembly = Assembly.LoadFile(newAssemblyPath);
+        afterAssemblyPath = WeaverHelper.Weave(beforeAssemblyPath);
+        assembly = Assembly.LoadFile(afterAssemblyPath);
     }
 
     [Test]
@@ -71,7 +61,7 @@ public class WeaverTests
     [Test]
     public void PeVerify()
     {
-        Verifier.Verify(assemblyPath,newAssemblyPath);
+        Verifier.Verify(beforeAssemblyPath, afterAssemblyPath);
     }
 #endif
 }

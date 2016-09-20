@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
 using Mono.Cecil.Cil;
 
-public class ModuleWeaver {
+public partial class ModuleWeaver {
     // Will log an informational message to MSBuild
     public Action<string> LogInfo { get; set; }
 
     // An instance of Mono.Cecil.ModuleDefinition for processing
     public ModuleDefinition ModuleDefinition { get; set; }
+    public IAssemblyResolver AssemblyResolver { get; set; }
 
     // Init logging delegates to make testing easier
     public ModuleWeaver() {
@@ -17,6 +19,7 @@ public class ModuleWeaver {
     }
 
     public void Execute() {
+        LoadSystemTypes();
         var allTypes = ModuleDefinition.GetAllTypes();
         foreach (var type in allTypes) {
             var allMethods = type.GetMethods();
@@ -53,6 +56,11 @@ public class ModuleWeaver {
         if (body.HasExceptionHandlers) {
             for (int i = 0; i < body.ExceptionHandlers.Count; i++) {
                 ilProcessor.InsertAfter(body.ExceptionHandlers[i].HandlerStart, Instruction.Create(OpCodes.Rethrow));
+
+                //ExceptionType =
+                //    ModuleDefinition.ImportReference(
+                //        msCoreLibDefinition.MainModule.Types.First(x => x.Name == "Exception"));
+                //ilProcessor.InsertAfter(body.ExceptionHandlers[i].HandlerStart, Instruction.Create(OpCodes.Newobj, ExceptionType));
             }
         }
         body.InitLocals = true;

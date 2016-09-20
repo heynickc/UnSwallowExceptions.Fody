@@ -26,6 +26,7 @@
   <Target Name="ReBuild" DependsOnTargets="NuGetBuild" />
   <Target Name="NuGetBuild" DependsOnTargets="Clean">
     <MakeDir Directories="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)UnSwallowExceptionsReferenceAssembly\bin\$(ConfigurationName)\UnSwallowExceptionsReferenceAssembly.dll" DestinationFolder="$(SolutionDir)NuGetBuild\Lib" />
     <Copy SourceFiles="$(SolutionDir)NuGet\UnSwallowExceptions.Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)BasicFodyAddin\bin\$(ConfigurationName)\UnSwallowExceptions.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)NuGet\Fody_ToBeDeleted.txt" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
