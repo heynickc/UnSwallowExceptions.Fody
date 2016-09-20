@@ -55,12 +55,12 @@ public partial class ModuleWeaver {
 
         if (body.HasExceptionHandlers) {
             for (int i = 0; i < body.ExceptionHandlers.Count; i++) {
-                ilProcessor.InsertAfter(body.ExceptionHandlers[i].HandlerStart, Instruction.Create(OpCodes.Rethrow));
+                var reflectionType = typeof (Exception);
+                var exceptionCtor = reflectionType.GetConstructor(new Type[] {});
+                var constructorReference = ModuleDefinition.ImportReference(exceptionCtor);
 
-                //ExceptionType =
-                //    ModuleDefinition.ImportReference(
-                //        msCoreLibDefinition.MainModule.Types.First(x => x.Name == "Exception"));
-                //ilProcessor.InsertAfter(body.ExceptionHandlers[i].HandlerStart, Instruction.Create(OpCodes.Newobj, ExceptionType));
+                ilProcessor.InsertAfter(body.ExceptionHandlers[i].HandlerStart, Instruction.Create(OpCodes.Throw));
+                ilProcessor.InsertAfter(body.ExceptionHandlers[i].HandlerStart, Instruction.Create(OpCodes.Newobj, constructorReference));               
             }
         }
         body.InitLocals = true;
