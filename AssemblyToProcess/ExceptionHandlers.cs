@@ -42,9 +42,5 @@ namespace AssemblyToProcess
 
             }
         }
-
-        public void Expected_unswallowed_exception() {
-            throw new Exception();
-        }
     }
 }
