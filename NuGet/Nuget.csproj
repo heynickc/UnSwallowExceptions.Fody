@@ -13,11 +13,11 @@
     <ConfigurationName>Release</ConfigurationName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="BasicFodyAddin.Fody.nuspec" />
     <None Include="install.ps1" />
     <None Include="packages.config" />
     <None Include="uninstall.ps1" />
     <Content Include="Fody_ToBeDeleted.txt" />
+    <None Include="UnSwallowExceptions.Fody.nuspec" />
   </ItemGroup>
   <Target Name="Clean">
     <RemoveDir Directories="$(SolutionDir)NuGetBuild" />
@@ -26,18 +26,18 @@
   <Target Name="ReBuild" DependsOnTargets="NuGetBuild" />
   <Target Name="NuGetBuild" DependsOnTargets="Clean">
     <MakeDir Directories="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)NuGet\BasicFodyAddin.Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)BasicFodyAddin\bin\$(ConfigurationName)\BasicFodyAddin.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)NuGet\UnSwallowExceptions.Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)BasicFodyAddin\bin\$(ConfigurationName)\UnSwallowExceptions.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)NuGet\Fody_ToBeDeleted.txt" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
     <Copy SourceFiles="$(ProjectDir)install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <Copy SourceFiles="$(ProjectDir)uninstall.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
-    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)BasicFodyAddin\bin\$(ConfigurationName)\BasicFodyAddin.Fody.dll" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)BasicFodyAddin\bin\$(ConfigurationName)\UnSwallowExceptions.Fody.dll" />
   </Target>
   <ItemGroup>
-    <ProjectReference Include="..\BasicFodyAddin\BasicFodyAddin.csproj">
+    <ProjectReference Include="..\BasicFodyAddin\UnSwallowExceptions.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <Project>{C3578A7B-09A6-4444-9383-0DEAFA4958BD}</Project>
-      <Name>BasicFodyAddin</Name>
+      <Name>UnSwallowExceptions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\packages\PepitaPackage.1.21.4\build\PepitaPackage.targets" Condition="Exists('..\packages\PepitaPackage.1.21.4\build\PepitaPackage.targets')" />

@@ -11,15 +11,12 @@ public class ModuleWeaver {
     // An instance of Mono.Cecil.ModuleDefinition for processing
     public ModuleDefinition ModuleDefinition { get; set; }
 
-    TypeSystem typeSystem;
-
     // Init logging delegates to make testing easier
     public ModuleWeaver() {
         LogInfo = m => { };
     }
 
     public void Execute() {
-        typeSystem = ModuleDefinition.TypeSystem;
         var allTypes = ModuleDefinition.GetAllTypes();
         foreach (var type in allTypes) {
             var allMethods = type.GetMethods();

@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ExceptionHandlers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UnSwallowExceptionsReferenceAssembly\UnSwallowExceptionsReferenceAssembly.csproj">
