@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -14,6 +15,10 @@ public partial class ModuleWeaver {
     // An instance of Mono.Cecil.ModuleDefinition for processing
     public ModuleDefinition ModuleDefinition { get; set; }
     public IAssemblyResolver AssemblyResolver { get; set; }
+
+    VariableDefinition paramsArrayVariable;
+    VariableDefinition messageVariable;
+    VariableDefinition exceptionVariable;
 
     // Init logging delegates to make testing easier
     public ModuleWeaver() {
@@ -58,16 +63,17 @@ public partial class ModuleWeaver {
         if (body.HasExceptionHandlers) {
             for (int i = 0; i < body.ExceptionHandlers.Count; i++) {
 
+                //This doesn't rethrow per se, but it might be the path to more fine grained control
                 //var exceptionType = typeof(Exception);
                 //var exceptionCtor = exceptionType.GetConstructor(new Type[] {});
                 //var constructorReference = ModuleDefinition.ImportReference(exceptionCtor);
-
                 //ilProcessor.InsertBefore(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Newobj, constructorReference));
                 //ilProcessor.InsertBefore(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Throw));    
-                
-                ilProcessor.Replace(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Rethrow));       
+
+                ilProcessor.Replace(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Rethrow));
             }
         }
+
         body.InitLocals = true;
         body.OptimizeMacros();
     }

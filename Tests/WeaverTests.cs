@@ -57,6 +57,14 @@ public class WeaverTests
         Assert.Throws<ArgumentException>(() => instance.Swallowed_exception_not_filtered_gets_unswallowed());
     }
 
+    [Test]
+    public void Unswallow_nested_swallowed_exception_parent_throws() {
+        var type = assembly.GetType("AssemblyToProcess.OnException");
+        var instance = (dynamic) Activator.CreateInstance(type);
+
+        Assert.Throws<Exception>(() => instance.UnSwallow_nested_swallowed_exception());
+    }
+
 #if(DEBUG)
     [Test]
     public void PeVerify()

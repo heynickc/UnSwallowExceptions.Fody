@@ -43,6 +43,22 @@ namespace AssemblyToProcess
         }
 
         [UnSwallowExceptions]
+        public void UnSwallow_nested_swallowed_exception() {
+            try {
+                try {
+                    throw new Exception();
+                }
+                catch (Exception) {
+
+                }
+            }
+            catch (Exception) {
+                
+                throw;
+            }
+        }
+
+        [UnSwallowExceptions]
         public void Swallowed_exception_not_filtered_gets_unswallowed() {
             try {
                 throw new ArgumentException();
