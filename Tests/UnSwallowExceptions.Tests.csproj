@@ -64,7 +64,7 @@
     <Compile Include="WeaverTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BasicFodyAddin\UnSwallowExceptions.csproj">
+    <ProjectReference Include="..\UnSwallowExceptions\UnSwallowExceptions.csproj">
       <Project>{C3578A7B-09A6-4444-9383-0DEAFA4958BD}</Project>
       <Name>UnSwallowExceptions</Name>
     </ProjectReference>

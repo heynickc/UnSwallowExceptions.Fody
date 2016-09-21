@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
 using Mono.Cecil.Cil;
+using MethodBody = Mono.Cecil.Cil.MethodBody;
 
 public partial class ModuleWeaver {
     // Will log an informational message to MSBuild
@@ -55,12 +57,13 @@ public partial class ModuleWeaver {
 
         if (body.HasExceptionHandlers) {
             for (int i = 0; i < body.ExceptionHandlers.Count; i++) {
-                var reflectionType = typeof (Exception);
-                var exceptionCtor = reflectionType.GetConstructor(new Type[] {});
+
+                var exceptionType = typeof(Exception);
+                var exceptionCtor = exceptionType.GetConstructor(new Type[] {});
                 var constructorReference = ModuleDefinition.ImportReference(exceptionCtor);
 
-                ilProcessor.InsertAfter(body.ExceptionHandlers[i].HandlerStart, Instruction.Create(OpCodes.Throw));
-                ilProcessor.InsertAfter(body.ExceptionHandlers[i].HandlerStart, Instruction.Create(OpCodes.Newobj, constructorReference));               
+                ilProcessor.InsertBefore(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Newobj, constructorReference));
+                ilProcessor.InsertBefore(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Throw));           
             }
         }
         body.InitLocals = true;
