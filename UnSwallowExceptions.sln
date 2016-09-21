@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyToProcess", "Assemb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnSwallowExceptionsReferenceAssembly", "UnSwallowExceptionsReferenceAssembly\UnSwallowExceptionsReferenceAssembly.csproj", "{45930042-38C6-470E-96EB-6BEDAB5410D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyToProcess.ConsoleApp", "FodyTest\AssemblyToProcess.ConsoleApp.csproj", "{1FCB33F2-285B-422D-94F6-E0B490907E9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,14 @@ Global
 		{45930042-38C6-470E-96EB-6BEDAB5410D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{45930042-38C6-470E-96EB-6BEDAB5410D3}.Release|x86.ActiveCfg = Release|Any CPU
 		{45930042-38C6-470E-96EB-6BEDAB5410D3}.Release|x86.Build.0 = Release|Any CPU
+		{1FCB33F2-285B-422D-94F6-E0B490907E9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FCB33F2-285B-422D-94F6-E0B490907E9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FCB33F2-285B-422D-94F6-E0B490907E9E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1FCB33F2-285B-422D-94F6-E0B490907E9E}.Debug|x86.Build.0 = Debug|Any CPU
+		{1FCB33F2-285B-422D-94F6-E0B490907E9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FCB33F2-285B-422D-94F6-E0B490907E9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FCB33F2-285B-422D-94F6-E0B490907E9E}.Release|x86.ActiveCfg = Release|Any CPU
+		{1FCB33F2-285B-422D-94F6-E0B490907E9E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
