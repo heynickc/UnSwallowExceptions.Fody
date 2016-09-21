@@ -8,7 +8,7 @@
     <owners>Nick Chamberlain</owners>
     <developmentDependency>true</developmentDependency>
     <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
-    <projectUrl>http://github.com/Fody/BasicFodyAddin</projectUrl>
+    <projectUrl>https://github.com/heynickc/UnSwallowExceptions.Fody</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>https://raw.github.com/Fody/BasicFodyAddin/master/Icons/package_icon.png</iconUrl>
     <description>Un-swallows any exceptions that have been swallowed using IL weaving</description>
