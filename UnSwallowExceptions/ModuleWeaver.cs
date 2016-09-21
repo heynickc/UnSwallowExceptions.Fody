@@ -58,12 +58,14 @@ public partial class ModuleWeaver {
         if (body.HasExceptionHandlers) {
             for (int i = 0; i < body.ExceptionHandlers.Count; i++) {
 
-                var exceptionType = typeof(Exception);
-                var exceptionCtor = exceptionType.GetConstructor(new Type[] {});
-                var constructorReference = ModuleDefinition.ImportReference(exceptionCtor);
+                //var exceptionType = typeof(Exception);
+                //var exceptionCtor = exceptionType.GetConstructor(new Type[] {});
+                //var constructorReference = ModuleDefinition.ImportReference(exceptionCtor);
 
-                ilProcessor.InsertBefore(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Newobj, constructorReference));
-                ilProcessor.InsertBefore(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Throw));           
+                //ilProcessor.InsertBefore(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Newobj, constructorReference));
+                //ilProcessor.InsertBefore(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Throw));    
+                
+                ilProcessor.Replace(body.ExceptionHandlers[i].HandlerEnd.Previous, Instruction.Create(OpCodes.Rethrow));       
             }
         }
         body.InitLocals = true;

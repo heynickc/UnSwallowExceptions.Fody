@@ -14,6 +14,15 @@ namespace AssemblyToProcess
             }
         }
 
+        public void Rethrown_exception_for_reference() {
+            try {
+                throw new Exception();
+            }
+            catch (Exception) {
+                throw;
+            }
+        }
+
         public void Swallowed_wrong_type_exception() {
             try {
                 throw new ArgumentException();
